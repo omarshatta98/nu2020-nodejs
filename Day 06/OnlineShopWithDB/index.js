@@ -60,11 +60,11 @@ app.get("/products", function (req, res) {
 });
 // Update
 app.put("/products/:id", function (req, res) {
-    let id = parseInt(req.params.id);
-    Product.update({ _id: id })
+    let id = req.params.id;
+    Product.update({ _id: id }, { name: req.body.name, price: req.body.price })
         .exec()
-        .then(prod => {
-            res.json(prod);
+        .then(result => {
+            res.json(result);
         })
         .catch(err => {
             res.json(err);
